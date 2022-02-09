@@ -19,15 +19,21 @@ const NUM_CLUES_PER_CAT = 5;
 //    }, ...4 more categories ...
 //  ]
 
-let categories = [];
-
-
+// let categories = [];
+// async function getCategories() {}
+getCategoryIds();
+getCategory(11496);
 /** Get NUM_CATEGORIES random categories from API.
  *
  * Returns array of category ids, e.g. [4, 12, 5, 9, 20, 1]
  */
 
 async function getCategoryIds() {
+  const res = await axios.get(
+    `${BASE_API_URL}categories?count=${NUM_CATEGORIES}`
+  );
+  //   console.log(res.data.map((cat) => cat.id));
+  return res.data.map((cat) => cat.id);
 }
 
 /** Return object with data about a category:
@@ -43,6 +49,14 @@ async function getCategoryIds() {
  */
 
 async function getCategory(catId) {
+  const res = await axios.get(`${BASE_API_URL}category?id=${catId}`);
+
+  const title = res.data.title;
+  const clues = res.data.clues.map((clue) => {
+    return { question: clue.question, answer: clue.answer, showing: null };
+  });
+  //   console.log({ title, clues });
+  return { title, clues };
 }
 
 /** Fill an HTML table with the categories & cells for questions.
@@ -53,8 +67,7 @@ async function getCategory(catId) {
  *   (initially, just show a "?" where the question/answer would go.)
  */
 
-function fillTable() {
-}
+function fillTable() {}
 
 /** Handle clicking on a clue: show the question or answer.
  *
@@ -64,21 +77,17 @@ function fillTable() {
  * - if currently "answer", ignore click
  * */
 
-function handleClick(evt) {
-}
+function handleClick(evt) {}
 
 /** Wipe the current Jeopardy board, show the loading spinner,
  * and update the button used to fetch data.
  */
 
-function showLoadingView() {
-
-}
+function showLoadingView() {}
 
 /** Remove the loading spinner and update the button used to fetch data. */
 
-function hideLoadingView() {
-}
+function hideLoadingView() {}
 
 /** Setup game data and board:
  * - get random category Ids
@@ -86,13 +95,11 @@ function hideLoadingView() {
  * - call fillTable to create HTML table
  */
 
-async function setupGameBoard() {
-}
+async function setupGameBoard() {}
 
 /** Start game: show loading state, setup game board, stop loading state */
 
-async function setupAndStart() {
-}
+async function setupAndStart() {}
 
 /** At start:
  *
