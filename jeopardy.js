@@ -26,7 +26,6 @@ let categories = [];
 
 const $startButton = $("#start-button");
 const $jeopardyTable = $("#jeopardy-table");
-console.log($jeopardyTable);
 
 /** Get NUM_CATEGORIES random categories from API.
  *
@@ -35,10 +34,13 @@ console.log($jeopardyTable);
 
 async function getCategoryIds() {
   const res = await axios.get(
-    `${BASE_API_URL}categories?count=${NUM_CATEGORIES}`
+    `${BASE_API_URL}categories?count=100` //
   );
+  let categories = _.sampleSize(res.data, NUM_CATEGORIES);
+  // console.log(categories);
   //   console.log(res.data.map((cat) => cat.id));
-  return res.data.map((cat) => cat.id);
+  
+  return categories.map((cat) => cat.id);
 }
 
 /** Return object with data about a category:
@@ -124,7 +126,7 @@ async function fillTable() {
     $jeopardyTable.append($tbody.append($tr));
 
     for (let col = 0; col < NUM_CATEGORIES; col++) {
-      $td = $("<td>").text("?");
+      $td = $("<td>").html('<i class="fas fa-question"></i>');
       $td.addClass("clue");
       $td.attr("row", row);
       $td.attr("col", col);
@@ -146,7 +148,7 @@ async function fillTable() {
  * */
 
 function handleClick(evt) {
-  let $target = $(evt.target);
+  let $target = $(evt.target).closest("td");
   let showing = $target.attr("showing");
   let col = $target.attr("col");
   let row = $target.attr("row");
@@ -171,7 +173,7 @@ function showLoadingView() {
   $startButton.text("Loading...");
   const $loadingSpinner = $("<i>");
   $startButton.prop("disabled", true);
-  $loadingSpinner.addClass("fas fa-spinner fa-spin");
+  $loadingSpinner.addClass("fas fa-10x fa-spinner fa-spin");
   $("#jeopardy-board").append($loadingSpinner);
 }
 

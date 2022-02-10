@@ -5,3 +5,58 @@
   #8d2ab5
   #74119c
 */
+body {
+  text-align: center;
+  background-color: #115ff4;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+h1 {
+  color: white;
+}
+
+#start-button {
+  background-color: #8d2ab5;
+  color: white;
+  font-size: large;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 10px;
+}
+
+td, th {
+  color: white;
+  background: #060ce9;
+  border: 1px solid white;
+}
+
+th {
+  padding: 5px;
+  width: 200px;
+  height: auto;
+}
+
+td {
+  height: 150px;
+  padding: 2px;
+}
+
+.answer {
+  background-color: #28a200;
+}
+
+table {
+  border-collapse: collapse;
+  text-align: center;
+}
+
+#jeopardy-board {
+  display: flex;
+  justify-content: center;
+}
+
+.fas {
+  color: white;
+}
